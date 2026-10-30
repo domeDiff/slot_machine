@@ -6,6 +6,9 @@ public class RandomPick : MonoBehaviour
     [SerializeField] private SlotSymbol[] slotSpace;          // the 3 slots
     [SerializeField] private float firstStopTime = 1f;
     [SerializeField] private float stopDelay = 0.5f;
+    [SerializeField] private SpriteRenderer slotHandle;
+    [SerializeField] private GameObject handleUp;
+    [SerializeField] private GameObject handleDown;
 
     private bool isSpinning;
 
@@ -19,6 +22,8 @@ public class RandomPick : MonoBehaviour
     private IEnumerator SpinRoutine()
     {
         isSpinning = true;
+        handleUp.SetActive(false);
+        handleDown.SetActive(true);
 
         foreach (SlotSymbol r in slotSpace) r.StartSpin();
 
@@ -33,6 +38,9 @@ public class RandomPick : MonoBehaviour
 
         // wait until every reel has landed
         while (AnySpinning()) yield return null;
+
+        handleUp.SetActive(true);
+        handleDown.SetActive(false);
 
         bool win = slotSpace[0].Result == slotSpace[1].Result &&
                    slotSpace[1].Result == slotSpace[2].Result;
