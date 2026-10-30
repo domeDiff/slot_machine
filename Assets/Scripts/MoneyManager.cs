@@ -11,7 +11,7 @@ public class MoneyManager : MonoBehaviour
     public int Balance { get; private set; }
     public int Bet {  get; private set; }
     public bool IsBroke => Balance <= 0;
-    public bool Locked { get; private set; } //lock money changes while isSpinning
+    public bool Locked { get; set; } //lock money changes while isSpinning
 
     private void Awake()
     {
@@ -64,8 +64,8 @@ public class MoneyManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        balanceText.text = "₹" + Balance;
-        betText.text = "Bet: " + Bet;
+        balanceText.text = "BALANCE: " + Balance;
+        betText.text = Bet + " $";
     }
 
 
