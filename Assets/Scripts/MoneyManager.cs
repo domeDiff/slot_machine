@@ -8,6 +8,8 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] private TMP_Text balanceText; //balanec after the bet
     [SerializeField] private TMP_Text betText;
 
+
+
     public int Balance { get; private set; }
     public int Bet {  get; private set; }
     public bool IsBroke => Balance <= 0;
@@ -65,8 +67,12 @@ public class MoneyManager : MonoBehaviour
     private void UpdateUI()
     {
         balanceText.text = "BALANCE: " + Balance;
-        betText.text = Bet + " $";
+        betText.text = Bet + "$";
     }
 
+    public void ClosePopup(GameObject window)
+    {
+        window.SetActive(false);
+    }
 
 }

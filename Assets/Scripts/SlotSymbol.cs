@@ -8,6 +8,7 @@ public class SlotSymbol : MonoBehaviour
     [SerializeField] private float speed = 12f; //fall down and recycle speed for symbls to give it moving down look
 
 
+
     private SpriteRenderer[] slots; //sprite renderer compoent for each individual slot;
     private int[] Ids;
 
@@ -81,4 +82,6 @@ public class SlotSymbol : MonoBehaviour
             IsSpinning = false;
         }
     }
+
+
 }
