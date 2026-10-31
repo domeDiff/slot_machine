@@ -22,6 +22,7 @@ public class RandomPick : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TMP_Text messageText; //show result
     [SerializeField] private TMP_Text winText; //win text
+    [SerializeField] private GameObject winWindow;
      [SerializeField] private GameObject gameOverPanel; //end game panel
 
     private bool isSpinning; //used to stop from spinning while a spin is already in place
@@ -44,7 +45,7 @@ public class RandomPick : MonoBehaviour
         money.ResetMoney(); //reset player balance to 100
         isSpinning = false; //set slot machine spin state to default
         gameOverPanel.SetActive(false); //remove the game over panel
-        messageText.text = "Place Your Bet!"; 
+        messageText.text = "Place Your Bet & Spin!"; 
     }
 
     public void QuitGame() //exit game
@@ -86,6 +87,7 @@ public class RandomPick : MonoBehaviour
         {
             payout = bet * tripleMultiplier[a];
             winText.text = "JACKPOT! You Win " + payout + "$";
+            winWindow.SetActive(true);
         }
 
         else if(a == b || b ==c || a == c)
