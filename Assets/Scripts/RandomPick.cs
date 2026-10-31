@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RandomPick : MonoBehaviour
@@ -69,11 +68,11 @@ public class RandomPick : MonoBehaviour
 
         foreach (SlotSymbol s in slotSpace)
         {
-            s.StopSpin();
+            s.StopSpin(); //stop first spin here then wait 0.5 sec
             yield return new WaitForSeconds(stopDelay); //wait till it reaches duration of stopDelay
         }
 
-        while (AnySpinning()) yield return null;
+        while (AnySpinning()) yield return null; //wait until all slots stop spinning
 
         handleUp.SetActive(true);
         handleDown.SetActive(false);
@@ -82,29 +81,29 @@ public class RandomPick : MonoBehaviour
         int b = slotSpace[1].Result; //result of the second slot
         int c = slotSpace[2].Result; // result of the third slot
         int bet = money.Bet; //bet amount
-        int payout = 0; 
+        int payout = 0; //default payout
 
-        if(a == b && b ==c)
+        if(a == b && b ==c) // if all three slot symbols are same then Jackpot
         {
             payout = bet * tripleMultiplier[a];
             winText.text = "JACKPOT! You Win " + payout + "$";
             winWindow.SetActive(true);
         }
 
-        else if(a == b || b ==c || a == c)
+        else if(a == b || b ==c || a == c) //if any two symbols are same then Pair & return the bet
         {
             payout = bet;
             messageText.text = "Pair! Bet Returned";
         }
 
-        else
+        else //if all three are distinct
         {
             messageText.text = "You Lose " + bet + "$";
         }
 
-        money.Win(payout);
+        money.Win(payout); //if Jackpot then add multiplier based on symbol and payout to the player
 
-        if (money.IsBroke)
+        if (money.IsBroke) //if balance == 0 then player loses
         {
             messageText.text = "You are Broke!";
             gameOverPanel.SetActive(true);
@@ -114,11 +113,11 @@ public class RandomPick : MonoBehaviour
         isSpinning = false;
     }
 
-    private bool AnySpinning() 
+    private bool AnySpinning() //check if all slotSpaces have stopped spinning
     { 
         foreach(SlotSymbol s in slotSpace)
         {
-            if (s.IsSpinning) return true;
+            if (s.IsSpinning) return true; //if spinning return true, when spinning stops, returns false
         }
         return false;
     }
