@@ -59,6 +59,7 @@ public class RandomPick : MonoBehaviour
         isSpinning = true; //to set machine state in-play
         money.Locked = true; //make placing bet locked while spinning
         Debug.Log("Spinning");
+
         handleUp.SetActive(false); //swap handle sprite
         handleDown.SetActive(true);
 
@@ -121,5 +122,4 @@ public class RandomPick : MonoBehaviour
         }
         return false;
     }
-
 }
